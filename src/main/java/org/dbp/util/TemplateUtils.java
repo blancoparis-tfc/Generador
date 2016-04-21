@@ -55,7 +55,14 @@ public class TemplateUtils {
 	 */
 	public void crearPlantilla(final Map<String,Object> contexto,final String pathPlantilla,final String pathSalida) throws IOException, TemplateException{
 		logger.debug("Vamos a crear el fichero[{}]",pathSalida);
-		Optional<Path> path =obtenerFichero(pathSalida);
+		crearPlantilla(contexto, pathPlantilla, Paths.get(pathSalida));
+	}
+
+	public void crearPlantilla(final Map<String, Object> contexto,
+			final String pathPlantilla, Path pathS) throws IOException,
+			TemplateNotFoundException, MalformedTemplateNameException,
+			ParseException, TemplateException {
+		Optional<Path> path =obtenerFichero(pathS);
 		if(path.isPresent()){
 			try(BufferedWriter writer = Files.newBufferedWriter(path.get())){
 				crearPlantilla(contexto,pathPlantilla,writer);
@@ -70,10 +77,10 @@ public class TemplateUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	private Optional<Path> obtenerFichero(final String pathSalida) throws IOException {
-		Path salida = Paths.get(pathSalida);
+	private Optional<Path> obtenerFichero(final Path salida) throws IOException {
+		//Path salida = Paths.get(pathSalida);
 		if(!Files.exists(salida)){
-			if(Files.exists(salida.getParent())){
+			if(!Files.exists(salida.getParent())){
 				Files.createDirectories(salida.getParent());
 			}
 			Files.createFile(salida);
