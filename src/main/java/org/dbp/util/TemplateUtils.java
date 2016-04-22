@@ -64,8 +64,12 @@ public class TemplateUtils {
 			ParseException, TemplateException {
 		Optional<Path> path =obtenerFichero(pathS);
 		if(path.isPresent()){
+			boolean borrar=false;
 			try(BufferedWriter writer = Files.newBufferedWriter(path.get())){
-				crearPlantilla(contexto,pathPlantilla,writer);
+				borrar=!crearPlantilla(contexto,pathPlantilla,writer);
+			}
+			if(borrar){
+				Files.delete(path.get());
 			}
 		}
 	}
@@ -102,9 +106,15 @@ public class TemplateUtils {
 	 * @throws IOException
 	 * @throws TemplateException
 	 */
-	public void crearPlantilla(final Map<String,Object> contexto,final String pathPlantilla,final Writer salida) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException{
-		Template plantilla = configuracion.getTemplate(pathPlantilla);
-		plantilla.process(contexto, salida);
+	public Boolean crearPlantilla(final Map<String,Object> contexto,final String pathPlantilla,final Writer salida) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException{
+		try{
+			Template plantilla = configuracion.getTemplate(pathPlantilla);
+			plantilla.process(contexto, salida);
+			return true;
+		}catch(TemplateNotFoundException e){
+			logger.warn("Se ha producido el siguiente error {}",e.getMessage());
+			return false;
+		}
 	}
 	
 }
