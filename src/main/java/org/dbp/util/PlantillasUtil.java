@@ -28,6 +28,8 @@ public class PlantillasUtil {
 	private final Path destino;
 	
 	private final TemplateUtils templateUtils;
+
+	private final Map<String,Object> parametros;
 	
 	public static final PlantillasUtil instancia(final TemplateUtils templateUtils,final Path destino){
 		return new PlantillasUtil(templateUtils,destino);
@@ -38,10 +40,16 @@ public class PlantillasUtil {
 		this.plantillas = new ArrayList<Plantillas>();
 		this.templateUtils =templateUtils;
 		this.destino = destino;
+		this.parametros = new HashMap<String,Object>();
 	}
 	
 	public PlantillasUtil add(String template,String subPath,String formatNombre){
 		plantillas.add(new Plantillas(template,subPath,formatNombre));
+		return this;
+	}
+	
+	public PlantillasUtil parametro(final String clave,final Object valor){
+		parametros.put(clave, valor);
 		return this;
 	}
 
@@ -52,7 +60,7 @@ public class PlantillasUtil {
 					,plantilla.getSubPath()
 					,String.format(plantilla.getFormatNombre(),metaDatos.getEntidad()));
 			logger.info(" Destino fichero [{}]",destinoFichero);
-			Map<String,Object> contexto = new HashMap<String,Object>();
+			Map<String,Object> contexto = new HashMap<String,Object>(this.parametros);
 			contexto.put("entidad", metaDatos);
 			templateUtils.crearPlantilla(contexto, plantilla.getTemplate(), destinoFichero);
 			

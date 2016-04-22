@@ -27,6 +27,7 @@ public class PlantillasUtilsTest {
 		PlantillasUtil plantillasUtils = PlantillasUtil.instancia(templateUtils, Paths.get(destino))
 				.add("p1.ftlh","f1","%sF1.java")
 				.add("p2.ftlh","f1","%sTest.java")
+				.parametro("nombre", "David")
 				;
 		Path ficheroDestinoF1 = Paths.get(destino,"f1","CampoF1.java");
 		Path ficheroDestinoTest = Paths.get(destino,"f1","CampoTest.java");
@@ -40,7 +41,7 @@ public class PlantillasUtilsTest {
 			assertEquals("Prueba Campo",reader.readLine());
 		}
 		try(BufferedReader reader=Files.newBufferedReader(ficheroDestinoTest)){
-			assertEquals("Test Campo",reader.readLine());
+			assertEquals("Test Campo - David",reader.readLine());
 		}
 
 	}

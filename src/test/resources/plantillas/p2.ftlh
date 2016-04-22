@@ -1,1 +1,1 @@
-Test ${entidad.entidad}
+Test ${entidad.entidad} - ${nombre}
