@@ -8,6 +8,7 @@ public class Campo {
 	
 	public Campo(Field campo){
 		this.campo=campo.getName();
+		//campo.getType().getSimpleName()
 		this.tipo=campo.getType();
 	}
 	
