@@ -8,7 +8,7 @@ import java.util.Properties;
 import org.dbp.util.MetaDatosBom;
 import org.dbp.util.PlantillasUtil;
 import org.dbp.util.TemplateUtils;
-//import org.dbp.bom.localizacion.PaisV2;
+import org.dbp.bom.localizacion.PaisV2;
 
 import freemarker.core.ParseException;
 import freemarker.template.MalformedTemplateNameException;
@@ -21,11 +21,11 @@ public class TfcContabilidad {
 	private static final String PLANTILLAS_TFC_CONTABILIDAD = "plantillas/tfcContabilidad";
 	private static final String PLANTILLAS_TFC_CONTABILIDAD_FILTRO = "plantillas/tfcContabilidad/filtro";
 	private final PlantillasUtil plantillasUtil;
-/*
+
 	public static void main(String[] args) throws IOException, TemplateException {
 		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_FILTRO);
 		tfcContabilidad.generarPlantilla(PaisV2.class, String.class, ".localizacion","localizacion/paisv2","IdAlfa2");
-	}*/
+	}
 	
 	public static final TfcContabilidad instancia(final String destino,String plantillas) throws IOException{
 		return new TfcContabilidad(destino,plantillas);
@@ -40,11 +40,11 @@ public class TfcContabilidad {
 		this.plantillasUtil =PlantillasUtil.instancia(templateUtils, Paths.get(destino))
 				.add("dao.ftlh","/service/src/main/java/org/dbp/dao/","%sDao.java")
 				.add("daoImpl.ftlh","/service/src/main/java/org/dbp/dao/impl/","%sDaoImpl.java")
-				.add("filtro.ftlh","/service/src/main/java/org/dbp/dto/","%sFiltro.java")
+				.add("filtro.ftlh","/service/src/main/java/org/dbp/dto/${subPaquete}","%sFiltro.java")
 				.add("daoTest.ftlh","/service/src/test/java/org/dbp/dao/","%sDaoTest.java")
 				.add("service.ftlh","/service/src/main/java/org/dbp/service/","%sService.java")
 				.add("serviceImpl.ftlh","/service/src/main/java/org/dbp/service/impl/","%sServiceImpl.java")
-				.add("controller.ftlh","/webapp/src/main/java/org/dbp/controller/","%sController.java")
+				.add("controller.ftlh","/webapp/src/main/java/org/dbp/controller/${subPaquete}","%sController.java")
 				.parametro("paqueteBase", "org.dbp")
 				;
 	}

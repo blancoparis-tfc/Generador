@@ -1,13 +1,14 @@
 package org.dbp.util;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.dbp.bean.MetaDatos;
 import org.dbp.bean.Plantillas;
@@ -30,6 +31,8 @@ public class PlantillasUtil {
 	private final TemplateUtils templateUtils;
 
 	private final Map<String,Object> parametros;
+	
+	private final Pattern patternVariable = Pattern.compile("\\$\\{\\w+\\}");
 	
 	public static final PlantillasUtil instancia(final TemplateUtils templateUtils,final Path destino){
 		return new PlantillasUtil(templateUtils,destino);
@@ -57,7 +60,7 @@ public class PlantillasUtil {
 		for(Plantillas plantilla:this.plantillas){
 			Path destinoFichero = Paths.get( 
 					 this.destino.toString()
-					,plantilla.getSubPath()
+					,procesarSubPath(plantilla)
 					,String.format(plantilla.getFormatNombre(),metaDatos.getEntidad()));
 			logger.info(" Destino fichero [{}]",destinoFichero);
 			Map<String,Object> contexto = new HashMap<String,Object>(this.parametros);
@@ -65,6 +68,19 @@ public class PlantillasUtil {
 			templateUtils.crearPlantilla(contexto, plantilla.getTemplate(), destinoFichero);
 			
 		}
+	}
+
+	private String procesarSubPath(Plantillas plantilla) {
+		String devolver=plantilla.getSubPath();
+		Matcher matcherVariables= patternVariable.matcher(devolver);
+		while(matcherVariables.find()){
+			String variable=matcherVariables.group();
+			devolver=devolver.replace(variable,
+					parametros.get(variable.replace("${", "}").replace("}",""))
+						.toString().replaceAll("\\.", "/")
+					);
+		}
+		return devolver;
 	}
 	
 }

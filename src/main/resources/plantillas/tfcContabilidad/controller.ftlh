@@ -1,4 +1,4 @@
-package ${paqueteBase}.controller;
+package ${paqueteBase}.controller${subPaquete};
 
 import ${paqueteBase}.bom${subPaquete}.${entidad.entidad};
 import ${paqueteBase}.core.controller.GenericRestController;

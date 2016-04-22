@@ -26,8 +26,9 @@ public class PlantillasUtilsTest {
 		String destino =System.getProperty("java.io.tmpdir"); 
 		PlantillasUtil plantillasUtils = PlantillasUtil.instancia(templateUtils, Paths.get(destino))
 				.add("p1.ftlh","f1","%sF1.java")
-				.add("p2.ftlh","f1","%sTest.java")
+				.add("p2.ftlh","${sub}","%sTest.java")
 				.parametro("nombre", "David")
+				.parametro("sub", "f1")
 				;
 		Path ficheroDestinoF1 = Paths.get(destino,"f1","CampoF1.java");
 		Path ficheroDestinoTest = Paths.get(destino,"f1","CampoTest.java");

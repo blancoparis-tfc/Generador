@@ -1,4 +1,4 @@
-package ${paqueteBase}.controller;
+package ${paqueteBase}.controller${subPaquete};
 
 import java.util.List;
 
