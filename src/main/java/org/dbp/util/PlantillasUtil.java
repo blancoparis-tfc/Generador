@@ -1,6 +1,7 @@
 package org.dbp.util;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.util.stream.Collectors.*;
 
 import org.dbp.bean.MetaDatos;
 import org.dbp.bean.Plantillas;
@@ -58,16 +61,20 @@ public class PlantillasUtil {
 
 	public void aplicarLasPlantillas(MetaDatos metaDatos) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException{
 		for(Plantillas plantilla:this.plantillas){
-			Path destinoFichero = Paths.get( 
-					 this.destino.toString()
-					,procesarSubPath(plantilla)
-					,String.format(plantilla.getFormatNombre(),metaDatos.getEntidad()));
+			Path destinoFichero = obtenerFichero(metaDatos, plantilla);
 			logger.info(" Destino fichero [{}]",destinoFichero);
 			Map<String,Object> contexto = new HashMap<String,Object>(this.parametros);
 			contexto.put("entidad", metaDatos);
 			templateUtils.crearPlantilla(contexto, plantilla.getTemplate(), destinoFichero);
 			
 		}
+	}
+
+	private Path obtenerFichero(MetaDatos metaDatos, Plantillas plantilla) {
+		return Paths.get( 
+				 this.destino.toString()
+				,procesarSubPath(plantilla)
+				,String.format(plantilla.getFormatNombre(),metaDatos.getEntidad()));
 	}
 
 	private String procesarSubPath(Plantillas plantilla) {
@@ -82,5 +89,12 @@ public class PlantillasUtil {
 		}
 		return devolver;
 	}
-	
+	public void eliminarLosGenerados(MetaDatos metaDatos) throws IOException{
+		List<Path> pathsParaBorrar=this.plantillas.stream()
+				.map(plantilla->obtenerFichero(metaDatos, plantilla))
+				.collect(toList());
+		for(Path path:pathsParaBorrar){
+			Files.deleteIfExists(path);
+		}
+	}
 }

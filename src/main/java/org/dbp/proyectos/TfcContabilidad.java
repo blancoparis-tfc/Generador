@@ -24,7 +24,8 @@ public class TfcContabilidad {
 
 	/*public static void main(String[] args) throws IOException, TemplateException {
 		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_FILTRO);
-		tfcContabilidad.generarPlantilla(PaisV2.class, String.class, ".localizacion","localizacion/paisv2","IdAlfa2");
+		//tfcContabilidad.generarPlantilla(PaisV2.class, String.class, ".localizacion","localizacion/paisv2","IdAlfa2");
+		tfcContabilidad.eliminarPlantillas(PaisV2.class, String.class, ".localizacion","localizacion/paisv2","IdAlfa2");
 	}*/
 	
 	public static final TfcContabilidad instancia(final String destino,String plantillas) throws IOException{
@@ -59,13 +60,24 @@ public class TfcContabilidad {
 	public void generarPlantilla(final Class idEntidad,final Class idClass,final String subPath
 			,final String url,final String campoId) 
 			throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException{
+		cargarElContexto(idClass, subPath, url, campoId);
+		this.plantillasUtil.aplicarLasPlantillas(MetaDatosBom.instancia().obtenerMetadatos(idEntidad));
+	}
+
+
+	public void eliminarPlantillas(final Class idEntidad,final Class idClass,final String subPath
+			,final String url,final String campoId) throws IOException{
+		cargarElContexto(idClass, subPath, url, campoId);
+		this.plantillasUtil.eliminarLosGenerados(MetaDatosBom.instancia().obtenerMetadatos(idEntidad));
+	}
+	
+	private void cargarElContexto(final Class idClass, final String subPath,
+			final String url, final String campoId) {
 		this.plantillasUtil.parametro("classId", idClass.getSimpleName());
 		this.plantillasUtil.parametro("subPaquete", subPath);
 
 		this.plantillasUtil.parametro("url", url);
 		this.plantillasUtil.parametro("campoId", campoId);
-		
-		this.plantillasUtil.aplicarLasPlantillas(MetaDatosBom.instancia().obtenerMetadatos(idEntidad));
 	}
 	
 }
