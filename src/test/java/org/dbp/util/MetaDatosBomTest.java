@@ -26,7 +26,7 @@ public class MetaDatosBomTest {
 	public void test003ValidarLosCamposDeCampo(){
 		MetaDatos metaDatos = MetaDatosBom.instancia().obtenerMetadatos(Campo.class);
 		assertEquals("La entidad","Campo",metaDatos.getEntidad());
-		assertThat(metaDatos.getCampos(), contains(new Campo("campo",String.class),new Campo("tipo",Class.class)));
+		assertThat(metaDatos.getCampos(), contains(new Campo("campo",String.class,"string"),new Campo("tipo",Class.class,"any"),new Campo("tipoTs",String.class,"string")));
 		
 	}
 }

@@ -8,7 +8,7 @@ import java.util.Properties;
 import org.dbp.util.MetaDatosBom;
 import org.dbp.util.PlantillasUtil;
 import org.dbp.util.TemplateUtils;
-import org.dbp.bom.localizacion.PaisV2;
+//import org.dbp.bom.localizacion.PaisV2;
 
 import freemarker.core.ParseException;
 import freemarker.template.MalformedTemplateNameException;
@@ -22,10 +22,10 @@ public class TfcContabilidad {
 	private static final String PLANTILLAS_TFC_CONTABILIDAD_FILTRO = "plantillas/tfcContabilidad/filtro";
 	private final PlantillasUtil plantillasUtil;
 
-	public static void main(String[] args) throws IOException, TemplateException {
+	/*public static void main(String[] args) throws IOException, TemplateException {
 		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_FILTRO);
 		tfcContabilidad.generarPlantilla(PaisV2.class, String.class, ".localizacion","localizacion/paisv2","IdAlfa2");
-	}
+	}*/
 	
 	public static final TfcContabilidad instancia(final String destino,String plantillas) throws IOException{
 		return new TfcContabilidad(destino,plantillas);
@@ -45,6 +45,13 @@ public class TfcContabilidad {
 				.add("service.ftlh","/service/src/main/java/org/dbp/service/","%sService.java")
 				.add("serviceImpl.ftlh","/service/src/main/java/org/dbp/service/impl/","%sServiceImpl.java")
 				.add("controller.ftlh","/webapp/src/main/java/org/dbp/controller/${subPaquete}","%sController.java")
+				// Angular 2
+				.add("model.ftlh","/webapp/src/main/webapp/WEB-INF/cliente/app/model/${subPaquete}","%s.ts")
+				.add("servicets.ftlh","/webapp/src/main/webapp/WEB-INF/cliente/app/service/${subPaquete}","%sService.ts")
+				.add("plantillaHtml.ftlh","/webapp/src/main/webapp/WEB-INF/cliente/app/component/pantallas/${subPaquete}","%s.component.html")
+				.add("component.ftlh","/webapp/src/main/webapp/WEB-INF/cliente/app/component/pantallas/${subPaquete}","%s.component.ts")
+
+				
 				.parametro("paqueteBase", "org.dbp")
 				;
 	}
