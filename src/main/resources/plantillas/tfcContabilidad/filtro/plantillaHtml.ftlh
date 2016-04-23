@@ -1,5 +1,6 @@
 <div #mensajeria></div>
 <form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
+<#assign cerrado = "SI">
 <#list entidad.campos as campo>
 	<#if (campo?counter % 2) == 1>
 	<div class="row">

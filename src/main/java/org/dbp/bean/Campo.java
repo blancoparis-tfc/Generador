@@ -26,7 +26,7 @@ public class Campo {
 		this.tipoTs = tipoTs;
 	}
 
-	private enum TipoTs{
+	public enum TipoTs{
 		string(String.class),
 		number(Long.class,Integer.class,Double.class,Float.class),
 		any

@@ -6,13 +6,13 @@ import {Mensajeria} from '../../core/mensajeria/mensajeria';
 import {${entidad.entidad},${entidad.entidad}Filtro} from '../../model${subPaquete?replace(".","/")}/${entidad.entidad}';
 
 @Injectable()
-export class ${entidad.entidad}Service implements IGenericService<${entidad.entidad},string>{
+export class ${entidad.entidad}Service implements IGenericService<${entidad.entidad},${classIdTs}>{
 
   private url:string='${url}';
-  private genericService:GenericService<${entidad.entidad},string>;
+  private genericService:GenericService<${entidad.entidad},${classIdTs}>;
 
   constructor(private http:Http,private mensajeria:Mensajeria)  {
-      this.genericService=new GenericService<${entidad.entidad},string>(http,this.url,mensajeria);
+      this.genericService=new GenericService<${entidad.entidad},${classIdTs}>(http,this.url,mensajeria);
   }
 
   public crear(${entidad.entidad?uncap_first}:${entidad.entidad},elemento:ElementRef):Observable<Response>{
@@ -27,11 +27,11 @@ export class ${entidad.entidad}Service implements IGenericService<${entidad.enti
       return this.genericService.actualizarLista(${entidad.entidad?uncap_first},elemento);
   }
 
-  public eliminar(id:string,elemento:ElementRef):Observable<Response>{
+  public eliminar(id:${classIdTs},elemento:ElementRef):Observable<Response>{
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerId(id:string,elemento:ElementRef):Observable<Response>{
+  public obtenerId(id:${classIdTs},elemento:ElementRef):Observable<Response>{
     return this.genericService.obtenerId(id,elemento);
   }
 

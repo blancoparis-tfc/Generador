@@ -5,10 +5,15 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Properties;
 
+import org.dbp.bean.Campo.TipoTs;
+import org.dbp.bom.contabilidad.enums.TipoMovimientoContable;
+import org.dbp.bom.localizacion.ComunidadAutonoma;
 import org.dbp.util.MetaDatosBom;
 import org.dbp.util.PlantillasUtil;
 import org.dbp.util.TemplateUtils;
 //import org.dbp.bom.localizacion.PaisV2;
+
+
 
 import freemarker.core.ParseException;
 import freemarker.template.MalformedTemplateNameException;
@@ -22,11 +27,12 @@ public class TfcContabilidad {
 	private static final String PLANTILLAS_TFC_CONTABILIDAD_FILTRO = "plantillas/tfcContabilidad/filtro";
 	private final PlantillasUtil plantillasUtil;
 
-	/*public static void main(String[] args) throws IOException, TemplateException {
+	public static void main(String[] args) throws IOException, TemplateException {
 		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_FILTRO);
-		//tfcContabilidad.generarPlantilla(PaisV2.class, String.class, ".localizacion","localizacion/paisv2","IdAlfa2");
-		tfcContabilidad.eliminarPlantillas(PaisV2.class, String.class, ".localizacion","localizacion/paisv2","IdAlfa2");
-	}*/
+		tfcContabilidad.eliminarPlantillas(ComunidadAutonoma.class, Long.class, ".localizacion","localizacion/comunidadAutonoma","IdAlfa2");
+		tfcContabilidad.generarPlantilla(ComunidadAutonoma.class, Long.class, ".localizacion","localizacion/comunidadAutonoma","Id");
+		
+	}
 	
 	public static final TfcContabilidad instancia(final String destino,String plantillas) throws IOException{
 		return new TfcContabilidad(destino,plantillas);
@@ -78,6 +84,8 @@ public class TfcContabilidad {
 
 		this.plantillasUtil.parametro("url", url);
 		this.plantillasUtil.parametro("campoId", campoId);
+		this.plantillasUtil.parametro("classIdTs", TipoTs.getTipo(idClass).name());
+		
 	}
 	
 }
