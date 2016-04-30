@@ -1,4 +1,4 @@
-import {Injectable,ElementRef} from 'angular2/core';
+import {Injectable,ElementRef,ViewContainerRef} from 'angular2/core';
 import {Http,Response,URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {GenericService,IGenericService} from '../core/GenericService';
@@ -15,31 +15,31 @@ export class ${entidad.entidad}Service implements IGenericService<${entidad.enti
       this.genericService=new GenericService<${entidad.entidad},${classIdTs}>(http,this.url,mensajeria);
   }
 
-  public crear(${entidad.entidad?uncap_first}:${entidad.entidad},elemento:ElementRef):Observable<Response>{
+  public crear(${entidad.entidad?uncap_first}:${entidad.entidad},elemento:ViewContainerRef):Observable<${entidad.entidad}>{
       return this.genericService.crear(${entidad.entidad?uncap_first},elemento);
   }
 
-  public actualizar(${entidad.entidad?uncap_first}:${entidad.entidad},elemento:ElementRef):Observable<Response>{
+  public actualizar(${entidad.entidad?uncap_first}:${entidad.entidad},elemento:ViewContainerRef):Observable<${entidad.entidad}>{
       return this.genericService.actualizar(${entidad.entidad?uncap_first},elemento);
   }
 
-  public actualizarLista(${entidad.entidad?uncap_first}:Array<${entidad.entidad}>,elemento:ElementRef):Observable<Response>{
+  public actualizarLista(${entidad.entidad?uncap_first}:Array<${entidad.entidad}>,elemento:ViewContainerRef):Observable<${entidad.entidad}>{
       return this.genericService.actualizarLista(${entidad.entidad?uncap_first},elemento);
   }
 
-  public eliminar(id:${classIdTs},elemento:ElementRef):Observable<Response>{
+  public eliminar(id:${classIdTs},elemento:ViewContainerRef):Observable<Response>{
       return this.genericService.eliminar(id,elemento);
   }
 
-  public obtenerId(id:${classIdTs},elemento:ElementRef):Observable<Response>{
+  public obtenerId(id:${classIdTs},elemento:ViewContainerRef):Observable<${entidad.entidad}>{
     return this.genericService.obtenerId(id,elemento);
   }
 
-  public obtenerTodos(elemento:ElementRef):Observable<Response>{
+  public obtenerTodos(elemento:ViewContainerRef):Observable<${entidad.entidad}[]>{
       return this.genericService.obtenerTodos(elemento);
   }
 
-  public filtrar(filtro:${entidad.entidad}Filtro, elemento:ElementRef):Observable<Response>{
+  public filtrar(filtro:${entidad.entidad}Filtro, elemento:ViewContainerRef):Observable<Response>{
       var search:URLSearchParams=new URLSearchParams();
       <#list entidad.campos as campo>
   	  search.append('${campo.campo}',filtro.${campo.campo});

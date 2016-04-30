@@ -6,14 +6,12 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 import org.dbp.bean.Campo.TipoTs;
-import org.dbp.bom.contabilidad.enums.TipoMovimientoContable;
-import org.dbp.bom.localizacion.ComunidadAutonoma;
+import org.dbp.bom.localizacion.Direccion;
+import org.dbp.bom.localizacion.Municipio;
 import org.dbp.util.MetaDatosBom;
 import org.dbp.util.PlantillasUtil;
 import org.dbp.util.TemplateUtils;
 //import org.dbp.bom.localizacion.PaisV2;
-
-
 
 import freemarker.core.ParseException;
 import freemarker.template.MalformedTemplateNameException;
@@ -29,8 +27,8 @@ public class TfcContabilidad {
 
 	public static void main(String[] args) throws IOException, TemplateException {
 		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_FILTRO);
-		tfcContabilidad.eliminarPlantillas(ComunidadAutonoma.class, Long.class, ".localizacion","localizacion/comunidadAutonoma","IdAlfa2");
-		tfcContabilidad.generarPlantilla(ComunidadAutonoma.class, Long.class, ".localizacion","localizacion/comunidadAutonoma","Id");
+		tfcContabilidad.eliminarPlantillas(Direccion.class, Long.class, ".localizacion","localizacion/direccion","Id");
+		tfcContabilidad.generarPlantilla(Direccion.class, Long.class, ".localizacion","localizacion/direccion","Id");
 		
 	}
 	

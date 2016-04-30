@@ -1,4 +1,4 @@
-import {Component,ElementRef} from 'angular2/core';
+import {Component,ViewContainerRef} from 'angular2/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
@@ -9,6 +9,7 @@ import {${entidad.entidad}Service} from '../../../service${subPaquete?replace(".
 @Component({
   selector:'${entidad.entidad}',
   templateUrl:'app/component/pantallas${subPaquete?replace(".","/")}/${entidad.entidad}.component.html',
+  providers:[${entidad.entidad}Service],
   directives:[Grid,AutoFocus]
 })
 export class ${entidad.entidad}Component{
@@ -16,7 +17,7 @@ export class ${entidad.entidad}Component{
     lineas:Array<${entidad.entidad}>;
     columnas:Array<Columna>;
     constructor(
-      private elemento:ElementRef
+      private elemento:ViewContainerRef
       ,private dialogo:DbpDialogo
       ,private ${entidad.entidad}Service:${entidad.entidad}Service
     ){
