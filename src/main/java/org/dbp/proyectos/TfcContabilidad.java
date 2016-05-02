@@ -23,10 +23,11 @@ public class TfcContabilidad {
 	
 	private static final String PLANTILLAS_TFC_CONTABILIDAD = "plantillas/tfcContabilidad";
 	private static final String PLANTILLAS_TFC_CONTABILIDAD_FILTRO = "plantillas/tfcContabilidad/filtro";
+	private static final String PLANTILLAS_TFC_CONTABILIDAD_CRUD = "plantillas/tfcContabilidad/crud";
 	private final PlantillasUtil plantillasUtil;
 
 	public static void main(String[] args) throws IOException, TemplateException {
-		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_FILTRO);
+		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_CRUD);
 		tfcContabilidad.eliminarPlantillas(Direccion.class, Long.class, ".localizacion","localizacion/direccion","Id");
 		tfcContabilidad.generarPlantilla(Direccion.class, Long.class, ".localizacion","localizacion/direccion","Id");
 		
