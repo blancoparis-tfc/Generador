@@ -1,4 +1,4 @@
-import {Component,ViewContainerRef} from 'angular2/core';
+import {Component,ViewContainerRef} from '@angular/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
@@ -6,7 +6,7 @@ import {AutoFocus} from '../../../core/directivas/autofocus.directive';
 import {Mensajeria} from '../../../core/mensajeria/mensajeria';
 import {OperacionesUtils,Estado} from '../../../core/utils/components/operacionesUtil';
 
-import {${entidad.entidad},${entidad.entidad}Filtro} from '../../../model/localizacion/${entidad.entidad}';
+import {${entidad.entidad},${entidad.entidad}Filtro} from '../../../model${subPaquete?replace(".","/")}/${entidad.entidad}';
 import {${entidad.entidad}Service} from '../../../service${subPaquete?replace(".","/")}/${entidad.entidad}Service';
 
 @Component({
@@ -49,7 +49,7 @@ export class ${entidad.entidad}Component{
 
     crear(){ 
 		this.transitarCrear();
-		this.modelo = new Direccion(null,null);		  
+		this.modelo = new ${entidad.entidad}(<#list entidad.campos as campo>null<#sep>,</#list>);
 	}
 
 	cancelar(){
@@ -58,7 +58,7 @@ export class ${entidad.entidad}Component{
 
     guardar(){
       this.operaciones.crear(
-        new DbpDialogoConfirmarConf('¿Quiere crear una nueva ${entidad.entidad?uncap_first}?','${entidad.entidad}'),this.modelo
+        new DbpDialogoConfirmarConf('Â¿Quiere crear una nueva ${entidad.entidad?uncap_first}?','${entidad.entidad}'),this.modelo
         ,(data)=>{
           this.mensajeria.success(this.elemento,'Se ha creado la ${entidad.entidad?uncap_first} ('+data.${campoId?uncap_first}+') correctamente.');
           this.lineas.push(data);
@@ -67,7 +67,7 @@ export class ${entidad.entidad}Component{
 
    modificar(){
       this.operaciones.actualizar(
-        new DbpDialogoConfirmarConf('¿Quiere actualizar la ${entidad.entidad?uncap_first}?','${entidad.entidad}'),this.modelo
+        new DbpDialogoConfirmarConf('Â¿Quiere actualizar la ${entidad.entidad?uncap_first}?','${entidad.entidad}'),this.modelo
         ,(data)=>{
           this.mensajeria.success(this.elemento,'Se actualizado la ${entidad.entidad?uncap_first} ('+data.${campoId?uncap_first}+') correctamente.');
           this.transitarFiltro();
@@ -82,7 +82,7 @@ export class ${entidad.entidad}Component{
     eliminarOp(id:number){
         var idx = this.lineas.indexOf(this.modelo);
 		this.operaciones.eliminar(
-		      new DbpDialogoConfirmarConf('¿Ser va eliminar el ${entidad.entidad?uncap_first} '+${campoId?uncap_first}+'?','${entidad.entidad}'),id
+		      new DbpDialogoConfirmarConf('Â¿Ser va eliminar el ${entidad.entidad?uncap_first} '+${campoId?uncap_first}+'?','${entidad.entidad}'),id
 		      ,(data)=>{
 		        this.mensajeria.success(this.elemento,'Se ha eliminado el ${entidad.entidad?uncap_first} ('+${campoId?uncap_first}+') correctamente.');
 		        this.transitarFiltro();
@@ -93,7 +93,7 @@ export class ${entidad.entidad}Component{
 	eliminar(elemento:any){
 	    var idx = this.lineas.indexOf(elemento);
 	    if(idx != -1){
-	        this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('¿Quieres eliminar la ${entidad.entidad?uncap_first} ('+elemento.id+')?','${entidad.entidad}')).then(dialogoComponent=>{
+	        this.dialogo.confirmar(this.elemento,new DbpDialogoConfirmarConf('Â¿Quieres eliminar la ${entidad.entidad?uncap_first} ('+elemento.id+')?','${entidad.entidad}')).then(dialogoComponent=>{
 	            dialogoComponent.instance.cuandoOk.then((_)=>{
 	                this.${entidad.entidad?uncap_first}Service.eliminar(elemento.${campoId?uncap_first},this.elemento).subscribe(res=>{
 	                    this.lineas.splice(idx,1);

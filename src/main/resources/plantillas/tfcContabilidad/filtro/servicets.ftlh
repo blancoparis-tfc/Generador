@@ -1,5 +1,5 @@
-import {Injectable,ElementRef,ViewContainerRef} from 'angular2/core';
-import {Http,Response,URLSearchParams} from 'angular2/http';
+import {Injectable,ElementRef,ViewContainerRef} from '@angular/core';
+import {Http,Response,URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {GenericService,IGenericService} from '../core/GenericService';
 import {Mensajeria} from '../../core/mensajeria/mensajeria';

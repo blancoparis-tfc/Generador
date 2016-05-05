@@ -1,9 +1,9 @@
-import {Component,ViewContainerRef} from 'angular2/core';
+import {Component,ViewContainerRef} from '@angular/core';
 import {Columna,TIPO_EDITABLE,TIPO_NO_EDITABLE} from '../../comun/grid/columna';
 import {DbpDialogo,DbpDialogoAlertConf,DbpDialogoConfirmarConf,DbpDialogoBaseConf,DbpDialogoRef} from '../../../core/modal/dialogo';
 import {Grid} from '../../comun/grid/grid';
 import {AutoFocus} from '../../../core/directivas/autofocus.directive';
-import {${entidad.entidad},${entidad.entidad}Filtro} from '../../../model/localizacion/${entidad.entidad}';
+import {${entidad.entidad},${entidad.entidad}Filtro} from '../../../model${subPaquete?replace(".","/")}/${entidad.entidad}';
 import {${entidad.entidad}Service} from '../../../service${subPaquete?replace(".","/")}/${entidad.entidad}Service';
 
 @Component({

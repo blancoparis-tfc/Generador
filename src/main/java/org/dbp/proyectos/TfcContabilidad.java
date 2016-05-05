@@ -6,8 +6,7 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 import org.dbp.bean.Campo.TipoTs;
-import org.dbp.bom.localizacion.Direccion;
-import org.dbp.bom.localizacion.Municipio;
+import org.dbp.bom.persona.PersonaFisica;
 import org.dbp.util.MetaDatosBom;
 import org.dbp.util.PlantillasUtil;
 import org.dbp.util.TemplateUtils;
@@ -28,8 +27,9 @@ public class TfcContabilidad {
 
 	public static void main(String[] args) throws IOException, TemplateException {
 		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_CRUD);
-		tfcContabilidad.eliminarPlantillas(Direccion.class, Long.class, ".localizacion","localizacion/direccion","Id");
-		tfcContabilidad.generarPlantilla(Direccion.class, Long.class, ".localizacion","localizacion/direccion","Id");
+		//tfcContabilidad.eliminarPlantillas(DatosDeContacto.class, Long.class, ".localizacion","localizacion/datosDeContacto","Id");
+		tfcContabilidad.eliminarPlantillas(PersonaFisica.class, Long.class, ".persona","persona/personaFisica","Id");
+		tfcContabilidad.generarPlantilla(PersonaFisica.class, Long.class, ".persona","persona/personaFisica","Id");
 		
 	}
 	

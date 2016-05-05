@@ -1,4 +1,3 @@
-<div #mensajeria></div>
 <form (ngSubmit)="onSubmit()" #formularioForm="ngForm">
 <#assign cerrado = "SI">
 <#list entidad.campos as campo>
