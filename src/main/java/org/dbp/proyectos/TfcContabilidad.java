@@ -23,10 +23,11 @@ public class TfcContabilidad {
 	private static final String PLANTILLAS_TFC_CONTABILIDAD = "plantillas/tfcContabilidad";
 	private static final String PLANTILLAS_TFC_CONTABILIDAD_FILTRO = "plantillas/tfcContabilidad/filtro";
 	private static final String PLANTILLAS_TFC_CONTABILIDAD_CRUD = "plantillas/tfcContabilidad/crud";
+	private static final String PLANTILLAS_TFC_CONTABILIDAD_CRUD_AVANZADO = "plantillas/tfcContabilidad/crud/avanzado";
 	private final PlantillasUtil plantillasUtil;
 
 	public static void main(String[] args) throws IOException, TemplateException {
-		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_CRUD);
+		TfcContabilidad tfcContabilidad= TfcContabilidad.instancia("C:\\Users\\david\\Documents\\GitHub\\tfcContabilidad\\",PLANTILLAS_TFC_CONTABILIDAD_CRUD_AVANZADO);
 		//tfcContabilidad.eliminarPlantillas(DatosDeContacto.class, Long.class, ".localizacion","localizacion/datosDeContacto","Id");
 		tfcContabilidad.eliminarPlantillas(PersonaFisica.class, Long.class, ".persona","persona/personaFisica","Id");
 		tfcContabilidad.generarPlantilla(PersonaFisica.class, Long.class, ".persona","persona/personaFisica","Id");
@@ -56,6 +57,8 @@ public class TfcContabilidad {
 				.add("servicets.ftlh","/webapp/src/main/webapp/WEB-INF/cliente/app/service/${subPaquete}","%sService.ts")
 				.add("plantillaHtml.ftlh","/webapp/src/main/webapp/WEB-INF/cliente/app/component/pantallas/${subPaquete}","%s.component.html")
 				.add("component.ftlh","/webapp/src/main/webapp/WEB-INF/cliente/app/component/pantallas/${subPaquete}","%s.component.ts")
+				.add("componentFicha.ftlh","/webapp/src/main/webapp/WEB-INF/cliente/app/component/pantallas/${subPaquete}","%sFicha.component.ts")
+				.add("plantillaFichaHtml.ftlh","/webapp/src/main/webapp/WEB-INF/cliente/app/component/pantallas/${subPaquete}","%sFicha.component.html")
 
 				
 				.parametro("paqueteBase", "org.dbp")
