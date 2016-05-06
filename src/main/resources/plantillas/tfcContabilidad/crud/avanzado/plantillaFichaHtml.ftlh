@@ -24,7 +24,7 @@
   	</#if>
 		<div  class="col-md-6 form-group">
 			<br/>
-				<button type="submit" class="btn btn-success">{{etiquetaEstado}}<</button>
+				<button type="submit" class="btn btn-success">{{etiquetaEstado}}</button>
 				<button *ngIf="isModificar()" type="button" class="btn btn-danger" (click)="eliminar(modelo.${campoId?uncap_first})"> eliminar </button>
 				<button type="button" class="btn btn-info" (click)="volver()">volver</button>
 		</div>

@@ -24,9 +24,17 @@ export class ${entidad.entidad}FichaComponent{
 		private viewContainerRef:ViewContainerRef,
 		private dialogo:DbpDialogo,
 		private mensajeria:Mensajeria,
+		params:RouteParams,
 		private router:Router
 	){
+		var identificador:string=params.get("${campoId?uncap_first}");
 	 	this.transitarCrear();
+		if(identificador!=null){
+			this.${entidad.entidad?uncap_first}Service.obtenerId(Number(identificador),this.viewContainerRef).subscribe(data=>{
+			this.modelo=data;
+			this.transitarModificar();
+			})
+		}
 		this.operaciones = new OperacionesUtils<${entidad.entidad},${classIdTs}>(dialogo,${entidad.entidad?uncap_first}Service,viewContainerRef);
 	  }
 	  

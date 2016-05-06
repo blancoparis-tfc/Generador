@@ -82,8 +82,12 @@ export class ${entidad.entidad}Component{
     }
     
 	seleccionar(fila:any){
-		this.modelo=fila;
-		this.transitarModificar();
+		if(this.dbpDialogoRef!=null){
+			this.modelo=fila;
+			this.transitarModificar();
+		}else{
+			this.router.navigate(['/${entidad.entidad}',{id:fila.${campoId?uncap_first}}]);
+		}
 	}
 
     eliminarOp(id:number){
